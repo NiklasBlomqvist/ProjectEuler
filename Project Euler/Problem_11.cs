@@ -72,7 +72,7 @@ namespace ProjectEuler
             {
                 if(IndexOutOfRange(row + i, column + i)) return result;
 
-                result = input[row + i, column + i];
+                result *= input[row + i, column + i];
             }
 
             return result;
@@ -85,7 +85,7 @@ namespace ProjectEuler
             {
                 if(IndexOutOfRange(row + i, column - i)) return result;
 
-                result = input[row + i, column - i];
+                result *= input[row + i, column - i];
             }
 
             return result;
