@@ -34,84 +34,36 @@ namespace ProjectEuler
         public static void Solve()
         {
             var maxProduct = 0L;
-
-            // Get the number of rows
             var rows = input.GetLength(0);
-            // Get the number of columns
             var columns = input.GetLength(1);
 
             for(var row = 0; row < rows; row++)
             {
                 for(var column = 0; column < columns; column++)
                 {
-                    var rowProduct = CalculateMaxProductRow(row, column);
-                    if(rowProduct > maxProduct)
-                        maxProduct = rowProduct;
-
-                    var columnProduct = CalculateMaxProductColumns(row, column);
-                    if(columnProduct > maxProduct)
-                        maxProduct = columnProduct;
-
-                    var diagonalUpResult = CalculateMaxProductDiagonalDown(row, column);
-                    if(diagonalUpResult > maxProduct)
-                        maxProduct = diagonalUpResult;
-
-                    var diagnoalDownResult = CalculateMaxProductDiagonalUp(row, column);
-                    if(diagnoalDownResult > maxProduct)
-                        maxProduct = diagnoalDownResult;
+                    maxProduct = Math.Max(maxProduct, CalculateProduct(row, column, 0, 1)); // Adjacent numbers in row.
+                    maxProduct = Math.Max(maxProduct, CalculateProduct(row, column, 1, 0)); // Adjacent numbers in column.
+                    maxProduct = Math.Max(maxProduct, CalculateProduct(row, column, 1, 1)); // Adjacent numbers diagonally down.
+                    maxProduct = Math.Max(maxProduct, CalculateProduct(row, column, 1, -1)); // Adjacent numbers diagonally up.
                 }
             }
 
             System.Console.WriteLine($"Greatest product of adjacent {adjacentNumberCount} numbers: {maxProduct}");
         }
 
-        private static long CalculateMaxProductDiagonalDown(int row, int column)
+        private static long CalculateProduct(int row, int column, int rowIncrement, int columnIncrement)
         {
             var result = 1L;
-            for(var i = 0; i < adjacentNumberCount; i++) 
+            for (var i = 0; i < adjacentNumberCount; i++)
             {
-                if(IndexOutOfRange(row + i, column + i)) return result;
+                var newRow = row + i * rowIncrement;
+                var newColumn = column + i * columnIncrement;
 
-                result *= input[row + i, column + i];
+                if(IndexOutOfRange(newRow, newColumn)) return result;
+
+                result *= input[newRow, newColumn];
             }
 
-            return result;
-        }
-
-        private static long CalculateMaxProductDiagonalUp(int row, int column)
-        {
-            var result = 1L;
-            for(var i = 0; i < adjacentNumberCount; i++) 
-            {
-                if(IndexOutOfRange(row + i, column - i)) return result;
-
-                result *= input[row + i, column - i];
-            }
-
-            return result;
-        }
-
-        private static long CalculateMaxProductColumns(int row, int column)
-        {
-            var result = 1L;
-            for(var i = 0; i < adjacentNumberCount; i++) 
-            {
-                if(IndexOutOfRange(row + i, column)) return result;
-
-                result *= input[row + i, column];
-            }
-            return result;
-        }
-
-        private static long CalculateMaxProductRow(int row, int column)
-        {
-            var result = 1L;
-            for(var i = 0; i < adjacentNumberCount; i++)
-            {
-                if(IndexOutOfRange(row, column + i)) return result;
-
-                result *= input[row, column + i];
-            }
             return result;
         }
 
@@ -120,11 +72,7 @@ namespace ProjectEuler
             var rows = input.GetLength(0);
             var columns = input.GetLength(1);
 
-            if(row < 0 || row >= rows) return true;
-
-            if(column < 0 || column >= columns) return true;
-
-            return false;
+            return row < 0 || row >= rows || column < 0 || column >= columns;
         }
     }
 }
