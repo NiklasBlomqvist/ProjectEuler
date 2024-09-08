@@ -6,7 +6,7 @@
         {
             Console.WriteLine("Start of Program.");
 
-            Problem_8.Solve();
+            Problem_9.Solve();
 
             Console.WriteLine("End of Program.");
         }
