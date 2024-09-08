@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Start of Program.");
 
-            Problem_7.Solve();
+            Problem_8.Solve();
 
             Console.WriteLine("End of Program.");
         }
