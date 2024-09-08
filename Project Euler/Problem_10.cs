@@ -1,12 +1,19 @@
+using System.Diagnostics;
+
 namespace ProjectEuler
 {
     public static class Problem_10
     {
         public static void Solve()
         {
+            var stopwatch = new Stopwatch();
+
+            stopwatch.Start();
             var n = 2000000;
             var result = SumPrimesBelow(n);
+            stopwatch.Stop();
             Console.WriteLine($"Sum of all primes below {n} is {result}.");
+            Console.WriteLine($"Time taken: {stopwatch.ElapsedMilliseconds} ms");
         }
 
         /// <summary>
@@ -16,11 +23,14 @@ namespace ProjectEuler
         /// <returns></returns>
         private static bool IsPrime(int p)
         {
+            // Smaller numbers than 2 cannot be primes.
             if (p < 2) return false;
 
+            // First 2 prime numbers.
             if (p == 2 || p == 3)
                 return true;
 
+            // If evenly divisble with 2 or 3 it is not a prime.
             if (p % 2 == 0 || p % 3 == 0)
                 return false;
 
