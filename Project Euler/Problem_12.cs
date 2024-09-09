@@ -1,5 +1,3 @@
-
-
 namespace ProjectEuler;
 
 public static class Problem_12
@@ -14,19 +12,13 @@ public static class Problem_12
 
         while (maxFactors <= 500)
         {
-            // Sum of natural numbers formula: N * (N + 1) / 2
             triangleNumber += i;
             var numbersOfFactors = FindNumbersOfFactorsFor(triangleNumber);
 
             if (numbersOfFactors > maxFactors)
                 maxFactors = numbersOfFactors;
 
-            if (i % 100 == 0)
-                System.Console.WriteLine($"Progressing.... currently at triangle number {i}, max factors: {maxFactors}");
-
             i++;
-
-            //System.Console.WriteLine($"The triangle number {i} has {numbersOfFactors} factors.");
         }
 
         System.Console.WriteLine($"The first triangle number ({triangleNumber}) to have over 500 factors with {maxFactors} factors.");
@@ -49,7 +41,6 @@ public static class Problem_12
             {
                 numbersOfFactors *= power + 1;
                 n /= (int)Math.Pow(i, power); // Update the remaining number
-
             }
         }
 
