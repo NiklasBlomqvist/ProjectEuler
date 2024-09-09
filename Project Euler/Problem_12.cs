@@ -88,4 +88,46 @@ public static class Problem_12
 
         return true;
     }
+
+    ///
+    /// See below for nicer solution.
+    /// 
+    // public static void Solve()
+    // {
+    //     int n = 1;
+    //     while (true)
+    //     {
+    //         long triangleNumber = CalculateTriangleNumber(n);
+    //         int divisorCount = CountDivisors(triangleNumber);
+    //         if (divisorCount > 500)
+    //         {
+    //             System.Console.WriteLine(triangleNumber);
+    //             break;
+    //         }
+    //         n++;
+    //     }
+    // }
+
+    // public static long CalculateTriangleNumber(int n)
+    // {
+    //     return (long)n * (n + 1) / 2;
+    // }
+
+    // public static int CountDivisors(long number)
+    // {
+    //     int count = 0;
+    //     long sqrt = (long)Math.Sqrt(number);
+    //     for (long i = 1; i <= sqrt; i++)
+    //     {
+    //         if (number % i == 0)
+    //         {
+    //             count += 2;
+    //         }
+    //     }
+    //     if (sqrt * sqrt == number)
+    //     {
+    //         count--;
+    //     }
+    //     return count;
+    // }
 }
