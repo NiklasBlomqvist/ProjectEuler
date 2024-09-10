@@ -108,39 +108,44 @@ public static class Problem_13
 
     public static void Solve()
     {
-
         var result = new List<long>();
-
         var charList = input.ToCharArray();
-        System.Console.WriteLine(charList.Length);
-
         var sum = 0L;
         var remainder = 0L;
-        for (int j = 1; j <= 50; j++)
+        var digitLength = 50;
+        var numbersOfDigits = 100;
+        for (int j = 1; j <= digitLength; j++)
         {
             sum = remainder;
-            for (var i = 1; i <= 100; i++) // Sum all numbers in column
+            for (var i = 1; i <= numbersOfDigits; i++) // Sum all numbers in column.
             {
-                var index = 50 * i - j;
-                // System.Console.WriteLine(index);
-                var numericalValue = charList[index] - '0'; // Convert char to its numeric value
+                var index = digitLength * i - j;
+                var numericalValue = charList[index] - '0'; // Convert char to its numeric value.
                 sum += numericalValue;
             }
 
-            var lastDigit = sum % 10;
-            result.Add(lastDigit); // Add last digit of number
+            var lastDigit = sum % 10; // Get last digit.
+            result.Add(lastDigit); // Add last digit of number.
             remainder = sum / 10; // Remove last digit.
         }
 
-        result.Reverse(); // Reverse list to look at the highest numbers.
-
-        System.Console.WriteLine($"Remaining remainder: {remainder}");
-
-        System.Console.Write("First 10 digits:");
-        for (var i = 0; i < 10; i++)
+        // Add the remaining remainder.
+        while (remainder > 0)
         {
-            System.Console.Write(result[i]);
+            var lastDigit = remainder % 10;
+            result.Add(lastDigit);
+            remainder /= 10;
         }
-        System.Console.WriteLine("");
+
+        result.Reverse(); // Reverse list to look at the highest numbers.
+        
+        // Get the first 10 digits.
+        long first10Digits = 0;
+        for (int i = 0; i < 10 && i < result.Count; i++)
+        {
+            first10Digits = + result[i] + (first10Digits * 10);
+        }
+
+        System.Console.WriteLine($"The first 10 digits of the sum of the 100 50-digit numbers is: {first10Digits}");
     }
 }
