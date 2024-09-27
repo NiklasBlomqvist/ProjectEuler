@@ -4,7 +4,6 @@ namespace ProjectEuler;
 
 public static class Problem_17
 {
-
     private static readonly string[] units = [
             "", "one", "two", "three", "four", "five", "six", "seven",
             "eight", "nine", "ten", "eleven", "twelve", "thirteen",
@@ -19,12 +18,6 @@ public static class Problem_17
 
     public static void Solve()
     {
-        // Todo:
-        // Transform number into words
-        // Count word length
-        // Iterate to 1000 and sum all word lengths
-
-
         System.Console.WriteLine($"Counting...");
         var sum = 0;
         var length = 1000;
@@ -36,13 +29,13 @@ public static class Problem_17
             System.Console.WriteLine($"{i}: {word}, length: {wordLength}");
         }
         System.Console.WriteLine($"Sum word lengths up to {length} = {sum}");
-
-        // Individual testing.
-        // var word = FormulateWordFromNumber(117);
-        // var wordLength = CountWord(word);
-        // System.Console.WriteLine($"{word}, length: {wordLength}");
     }
 
+    /// <summary>
+    /// Counts the total number of letters used when writing out all the numbers from 1 to 1000 in words.
+    /// </summary>
+    /// <param name="word"></param>
+    /// <returns></returns>
     private static int CountWord(string word)
     {
         return word.Length;
@@ -66,28 +59,26 @@ public static class Problem_17
             var unit = number % 10;
             return $"{tens[ten]}{units[unit]}";
         }
-
+        
         if (number < 1000)
         {
             var hundred = number / 100;
             var remainder = number % 100;
 
-            var ten = 0;
-            var unit = 0;
             if (remainder < 20)
             {
-                unit = remainder;
+                return remainder > 0
+                    ? $"{units[hundred]}hundredand{units[remainder]}"
+                    : $"{units[hundred]}hundred";
             }
             else
             {
-                ten = remainder / 10;
-                unit = remainder % 10;
+                var ten = remainder / 10;
+                var unit = remainder % 10;
+                return remainder > 0
+                    ? $"{units[hundred]}hundredand{tens[ten]}{units[unit]}"
+                    : $"{units[hundred]}hundred";
             }
-
-            if (remainder > 0)
-                return $"{units[hundred]}hundredand{tens[ten]}{units[unit]}";
-            else
-                return $"{units[hundred]}hundred";
         }
 
         return "onethousand";
