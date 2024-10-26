@@ -7,7 +7,6 @@ public class Problem_19
     private static readonly string[] DayOfTheWeek =
         { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
-
     public static void Solve()
     {
         var numberOfSundaysInFirstMonth = 0;
@@ -27,6 +26,7 @@ public class Problem_19
                     {
                         numberOfSundaysInFirstMonth++;
                     }
+
                     dayIndex = IterateDayIndex(dayIndex);
                 }
             }
